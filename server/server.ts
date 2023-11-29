@@ -1,8 +1,8 @@
-const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
 const path = require("path");
 const bodyParser = require("body-parser");
+import express, { Request, Response } from "express";
 
 const app = express();
 
@@ -23,17 +23,17 @@ nextApp
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static(path.join(__dirname, "../", "public")));
 
-    app.use("/api", (req, res, next) => {
+    app.use("/api", (req: Request, res: Response) => {
       res.json({ res: "hello!" });
     });
 
-    app.get("/", (req, res) => {
+    app.get("/", (req: Request, res: Response) => {
       const parsedUrl = parse(req.url, true);
       const { pathname, query } = parsedUrl;
       nextApp.render(req, res, pathname, query);
     });
 
-    app.get("*", (req, res) => {
+    app.get("*", (req: Request, res: Response) => {
       return handle(req, res);
     });
 
@@ -46,7 +46,7 @@ nextApp
       console.log(`http://localhost:${port}`);
     });
   })
-  .catch((ex) => {
+  .catch((ex: { stack: any }) => {
     console.error(ex.stack);
     process.exit(1);
   });

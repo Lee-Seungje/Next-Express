@@ -8,6 +8,7 @@ export default function Test() {
   const [inputValue, setInputValue] = useState<string>("");
   const [repeatValue, setRepeatValue] = useState<string>("");
   const [resValue, setResValue] = useState<string>("");
+
   const onClick = async () => {
     const res = await axios.get("/api");
 
