@@ -1,8 +1,11 @@
 const dotenv = require('dotenv');
+
 dotenv.config({ path: '.env' });
 const path = require('path');
+
 const bodyParser = require('body-parser');
-import express, { Request, Response } from 'express';
+
+const express = require('express');
 
 const app = express();
 
@@ -10,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const next = require('next');
+
 const { parse } = require('url');
 
 const port = process.env.SERVER_PORT;
@@ -23,19 +27,17 @@ nextApp
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static(path.join(__dirname, '../', 'public')));
 
-    app.use('/api', (req: Request, res: Response) => {
+    app.use('/api', (req, res) => {
       res.json({ res: 'hello!' });
     });
 
-    app.get('/', (req: Request, res: Response) => {
+    app.get('/', (req, res) => {
       const parsedUrl = parse(req.url, true);
       const { pathname, query } = parsedUrl;
       nextApp.render(req, res, pathname, query);
     });
 
-    app.get('*', (req: Request, res: Response) => {
-      return handle(req, res);
-    });
+    app.get('*', (req, res) => handle(req, res));
 
     app.post('/test', (req, res, next) => {
       res.json({ repeat: String(req.body.value.repeat(req.body.num)) });
@@ -46,7 +48,7 @@ nextApp
       console.log(`http://localhost:${port}`);
     });
   })
-  .catch((ex: { stack: any }) => {
+  .catch((ex) => {
     console.error(ex.stack);
     process.exit(1);
   });
