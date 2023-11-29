@@ -38,7 +38,7 @@ nextApp
     });
 
     app.post("/test", (req, res, next) => {
-      res.json({ repeat: String(req.body.test.repeat(3)) });
+      res.json({ repeat: String(req.body.value.repeat(req.body.num)) });
     });
 
     app.listen(port, () => {

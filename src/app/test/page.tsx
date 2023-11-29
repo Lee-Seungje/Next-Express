@@ -15,7 +15,11 @@ export default function Test() {
   };
 
   const getRepeat = async () => {
-    const res = await axios.post("/test", { test: "test" });
+    const res = await axios.post("/test", {
+      value: repeatValue,
+      num: parseInt(inputValue),
+    });
+
     setResValue(res.data.repeat);
   };
 
