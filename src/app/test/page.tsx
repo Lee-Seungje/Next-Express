@@ -1,22 +1,23 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import { useState } from "react";
+import { useState } from 'react';
+
+import axios from 'axios';
 
 export default function Test() {
-  const [hello, setHello] = useState<string>("");
-  const [inputValue, setInputValue] = useState<string>("");
-  const [repeatValue, setRepeatValue] = useState<string>("");
-  const [resValue, setResValue] = useState<string>("");
+  const [hello, setHello] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>('');
+  const [repeatValue, setRepeatValue] = useState<string>('');
+  const [resValue, setResValue] = useState<string>('');
 
   const onClick = async () => {
-    const res = await axios.get("/api");
+    const res = await axios.get('/api');
 
     setHello(res.data.res);
   };
 
   const getRepeat = async () => {
-    const res = await axios.post("/test", {
+    const res = await axios.post('/test', {
       value: repeatValue,
       num: parseInt(inputValue),
     });
@@ -32,15 +33,15 @@ export default function Test() {
       <div>
         <input
           value={repeatValue}
-          className="caret-gray-800"
+          className='caret-gray-800'
           onChange={(e) => setRepeatValue(e.target.value)}
-          placeholder="무엇을 반복할까요?"
+          placeholder='무엇을 반복할까요?'
         />
         <input
           value={inputValue}
-          className="c-caret-gray-800"
+          className='c-caret-gray-800'
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="몇 번 반복할까요?"
+          placeholder='몇 번 반복할까요?'
         />
         <button onClick={getRepeat}>click</button>
         <h1>{resValue}</h1>
