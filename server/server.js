@@ -20,7 +20,7 @@ nextApp
     app.use(express.static(path.join(__dirname, "../", "public")));
 
     app.use("/api", (req, res, next) => {
-      res.send("hello!");
+      res.json({ res: "hello!" });
     });
 
     app.get("/", (req, res) => {
